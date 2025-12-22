@@ -102,40 +102,27 @@ move_uploaded_file($file_tempname, $filepath);
 				if($header == 0) {
 					$header = 1;
 					continue;
-                }
-				$sql_columns = "";
-				$sql_values = "";
-				foreach($db_columns as $columns){
-						$sql_columns = $sql_columns . $columns . "," ;
-						$sql_values =  $sql_values . " ?,";
 				}
-				$sql_columns = substr($sql_columns, 0,strlen($sql_columns)-1);
-				$sql_values = substr($sql_values, 0,strlen($sql_values)-1);
-				foreach($line as $lines){
-						$lines = "'" . $lines . "'" . ",";
+                $column =implode(',',$db_columns);
+				// $lines = explode(',',$line);
+				$query_string = "insert into job_offers (";
+				foreach($db_columns as $col) {
+					$query_string = $query_string . $col . ",";
 				}
-                $sql = "insert into job_offers (${sql_columns})values(${sql_values});" ;
-				print $sql;
-				$pre = $db -> prepare($sql);
+				$query_string = substr($query_string, 0,strlen($query_string)-1) . ") values (";
 
-				$pre -> execute($line);
-				$db_columns[] = ',';
-				array_unshift($line, "'");
-				$line[] = "',";
-                $sql = "insert into job_offers (:columns)values(:id);" ;
-				$pre = $db -> prepare($sql);
-				foreach($db_columns as $colum){
-				$pre ->bindValue(':columns',$colum,PDO::PARAM_STR);
+				foreach($line as $col) {
+					$query_string = $query_string  . "'" . $col . "',";
 				}
-				foreach($line as $lines){
-				$pre ->bindValue(':id', $lines,PDO::PARAM_STR);
-				}
-				print_r ($pre);
-				$pre -> execute();
-
+				$query_string = substr($query_string, 0,strlen($query_string)-1) . ")";
+				print $query_string;
+				$db->query($query_string);
+                // $db->query("insert into job_offers ($db_columns) values (" . $lines) ");
             }
 
-
+            /*
+            $db->query("insert into job_offers (a, b, c, d, e, ....) values (1, 2, 3, 4, 5, ....)")  =>  implode
+             */
 
             fclose($f);
         }
