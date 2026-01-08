@@ -103,8 +103,6 @@ move_uploaded_file($file_tempname, $filepath);
 					$header = 1;
 					continue;
 				}
-                $column =implode(',',$db_columns);
-				// $lines = explode(',',$line);
 				$query_string = "insert into job_offers (";
 				foreach($db_columns as $col) {
 					$query_string = $query_string . $col . ",";
@@ -117,13 +115,7 @@ move_uploaded_file($file_tempname, $filepath);
 				$query_string = substr($query_string, 0,strlen($query_string)-1) . ")";
 				print $query_string;
 				$db->query($query_string);
-                // $db->query("insert into job_offers ($db_columns) values (" . $lines) ");
             }
-
-            /*
-            $db->query("insert into job_offers (a, b, c, d, e, ....) values (1, 2, 3, 4, 5, ....)")  =>  implode
-             */
-
             fclose($f);
         }
 	} catch(PDOException $e) {
