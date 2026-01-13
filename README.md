@@ -5,7 +5,7 @@ php開発
 
 ```SQL
 CREATE TABLE job_offers (
-    id  INT NOT NULL PRIMARY KEY COMMENT '番号',
+    id  INT AUTO_INCREMENT PRIMARY KEY COMMENT '番号',
     management_number VARCHAR(50) COMMENT '管理番号',
     company_name VARCHAR(255) COMMENT '事業所名',
     company_name_kana VARCHAR(255) COMMENT '事業所名 カナ',
