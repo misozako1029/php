@@ -84,8 +84,9 @@ $db_columns = [
 	"hw_occ_class2_small",
 	"handy_occ_class2_large",
 	"handy_occ_class2_middle",
-	"favorite_count"
+	"favorite_count",
 ];
+
 $check_num = [
 
 	"recruitment_year",
@@ -102,8 +103,8 @@ $check_num = [
 	"applicant_count",
 	"hiring_count",
 	"favorite_count",
-
 ];
+
 $check_null = [
 	"recruitment_year",
 	"job_offer_id",
@@ -197,19 +198,22 @@ move_uploaded_file($file_tempname, $filepath);
 				foreach($db_columns as $column){
 						$sql_columns = $sql_columns . $column . "," ;
 						$sql_values =  $sql_values . " ?,";
-						if(in_array($column, $check_num)){
-							if(!is_numeric($line[$column_number])){
-								$Error_ms[] =  $column_line . '行目の' . $column. 'のデータが不正です' .'<br>';
+						if($_POST['er_check'] == 1){
+							if(in_array($column, $check_num)){
+								if(!is_numeric($line[$column_number])){
+									$Error_ms[] =  $column_line . '行目の' . $column. 'のデータが不正です' .'<br>';
+								}
+							}
+							if(in_array($column,$check_null)){
+								if($line[$column_number] == ""){
+										$Error_ms[] = $column_line . '行目の' . $column . 'のデータが不正です' . '<br>';
+								}
 							}
 						}
-						if(in_array($column,$check_null)){
-							if($line[$column_number] == ""){
-									$Error_ms[] = $column_line . '行目の' . $column . 'のデータが不正です' . '<br>';
-							}
-						}
-						
 						$column_number++;
 				}
+
+
 				$sql_columns = substr($sql_columns, 0,strlen($sql_columns)-1);
 				$sql_values = substr($sql_values, 0,strlen($sql_values)-1);
 				foreach($line as $lines){
@@ -219,17 +223,30 @@ move_uploaded_file($file_tempname, $filepath);
 				$pre = $db -> prepare($sql);
 
 				$pre -> execute($line);
+
 				
 				$column_line++;
 
             }
 			if(!empty($Error_ms)){
+				$comment = <<< EOT
+					<h2>データの登録に失敗しました</h2>
+					<a href="index.html">ホームに戻る</a>
+					<br>
+				EOT;
+				print $comment;
+
 				foreach($Error_ms as $ms){
 					print $ms;
 				}
 				$db ->rollBack();
 			}else{
+
 				$db -> commit();
+				print '<h2>'."データの登録に成功しました" . '</h2>';
+				$db -> commit();
+				print '<a href="index.html">ホームに戻る</a>';
+
 			}
 
 
