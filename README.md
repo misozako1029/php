@@ -5,11 +5,12 @@ php開発
 
 ```SQL
 CREATE TABLE job_offers (
+    id  INT NOT NULL PRIMARY KEY COMMENT '番号',
     management_number VARCHAR(50) COMMENT '管理番号',
     company_name VARCHAR(255) COMMENT '事業所名',
     company_name_kana VARCHAR(255) COMMENT '事業所名 カナ',
     recruitment_year INT COMMENT '求人年度',
-    job_offer_id VARCHAR(20) NOT NULL PRIMARY KEY COMMENT '求人番号',
+    job_offer_id VARCHAR(20) NOT NULL  COMMENT '求人番号',
     reception_center VARCHAR(50) COMMENT '受付安定所',
     office_number VARCHAR(20) COMMENT '事業所番号',
     is_public_internet VARCHAR(10) COMMENT 'インターネットへの公開',
