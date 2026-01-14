@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSVを選択</title>
-    <script src="../framework/tailwind.js"></script>
+    <script src="framework/tailwind.js"></script>
 </head>
-<body>
-    <form method="post" action="import.php" enctype="multipart/form-data">
-        <div class="all">    
-            <input type="file" name="csv_file" accept=".csv">
-            <br>
+<body class="bg-gray-300 min-h-[100vh] border border-gray-300 mt-10 mb-10 ml-40 mr-40 overflow-hidden">
+    <div class="flex justify-center items-center h-200px border">
+        <form method="post" action="import.php" enctype="multipart/form-data">    
+            <input type="file" name="csv_file" accept=".csv" >
+            
             <input type="hidden" name="er_check" value="0">
-            <input type="checkbox" name="er_check" value="1">検閲を有効にする<br>
-            <input type="submit" value="送信">
-        </div>
-    </form>
+            <p><input type="checkbox" name="er_check" value="1" class="mt-5 mb-5"> 検閲を有効にする </p>
+            <input type="submit" value="送信" class="bg-gray-800 hover:bg-gray-800 text-white rounded px-30 py-1 mt-5 mb-5">
+        </form>
+    </div>
     <form method="post" action="delete.php" onsubmit="return window.confirm('本当に削除しますか？');">
-        <input type="submit" value="データを削除">
+        <input type="submit" value="データを削除" class="bg-red-900 hover:bg-red-800 text-white rounded px-27 py-1">
     </form>
 </body>
 </html>
