@@ -3,16 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
     <title>CSVを選択</title>
+    <script src="../framework/tailwind.js"></script>
 </head>
 <body>
     <form method="post" action="import.php" enctype="multipart/form-data">
-<<<<<<< HEAD
-    <input type="file" name="csv_file" accept=".csv">
-    <br>
-    <input type="submit" value="送信">
-=======
         <div class="all">    
             <input type="file" name="csv_file" accept=".csv">
             <br>
@@ -20,7 +15,9 @@
             <input type="checkbox" name="er_check" value="1">検閲を有効にする<br>
             <input type="submit" value="送信">
         </div>
->>>>>>> 430bf5f (検閲機能のオンオフと二回目以降も追加で登録できるようにした)
+    </form>
+    <form method="post" action="delete.php" onsubmit="return window.confirm('本当に削除しますか？');">
+        <input type="submit" value="データを削除">
     </form>
 </body>
 </html>

@@ -244,7 +244,6 @@ move_uploaded_file($file_tempname, $filepath);
 
 				$db -> commit();
 				print '<h2>'."データの登録に成功しました" . '</h2>';
-				$db -> commit();
 				print '<a href="index.html">ホームに戻る</a>';
 
 			}
