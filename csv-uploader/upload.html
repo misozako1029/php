@@ -12,7 +12,7 @@
         <div class="flex flex-col items-center justify-center h-120 border bg-white  rounded-md w-full max-w-sm mx-auto">
             <p class="mt-5 mb-5 text-lg">CSVuploader</p>
             <form method="post" action="import.php" enctype="multipart/form-data" class="flex flex-col items-center">    
-                <input type="file" name="csv_file" accept=".csv" class="w-80 border rounded-md border-slate-800 file:bg-gray-300 bg-white mt-5 mb-5">
+                <input type="file" name="csv_file" accept=".csv" class="w-80 border rounded-md border-slate-800 file:bg-gray-300 hover:file:bg-white mt-5 mb-5">
                 <input type="hidden" name="er_check" value="0">
                 <p><input type="checkbox" name="er_check" value="1" class="mt-5 mb-5"> 検閲を有効にする </p>
                 <input type="submit" value="送信" class="w-80 bg-gray-800 hover:bg-white hover:text-gray-800 text-white rounded py-1 mt-5 mb-5 border">
