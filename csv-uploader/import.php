@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>送信結果</title>
+</head>
+<body>
+	<script src="framework/tailwind.js"></script>
+</body>
+</html>
 <?php
 $db_columns = [
 	"recruitment_year",
@@ -230,22 +241,29 @@ move_uploaded_file($file_tempname, $filepath);
             }
 			if(!empty($Error_ms)){
 				$comment = <<< EOT
+					<div class="flex flex-col items-center justify-center">
 					<h2>データの登録に失敗しました</h2>
-					<a href="index.html">ホームに戻る</a>
-					<br>
 				EOT;
 				print $comment;
-
+				print '<details>';
+				print '<summary>' . "エラー内容" . '</summary>';
 				foreach($Error_ms as $ms){
 					print $ms;
 				}
+				print '</details>';
+				print '<p>' . '<a href="upload.html">' . "ホームに戻る" . '</a>' . '</p>';
+				print '</div>';
 				$db ->rollBack();
 			}else{
 
 				$db -> commit();
-				print '<h2>'."データの登録に成功しました" . '</h2>';
-				print '<a href="index.html">ホームに戻る</a>';
-
+				$comment = <<< EOT
+					<div class="flex flex-col items-center justify-center">
+					<h2>データの登録に成功しました</h2>
+					<a href="upload.html">ホームに戻る</a>
+					</div>
+				EOT;
+				print $comment;
 			}
 
 
